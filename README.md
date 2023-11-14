@@ -6,3 +6,7 @@ making music streaming app 'FLO'
 # 기능
 1. 메인 화면
   a. 앨범, 팟캐스트, 비디오 컬렉션
+2. 곡 화면
+  a. 플레이바
+3. 앨범 화면
+  a. 곡 목록
