@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "UMC_FLO_APP"
+rootProject.name = "UMC_FLO_App"
 include(":app")
  
