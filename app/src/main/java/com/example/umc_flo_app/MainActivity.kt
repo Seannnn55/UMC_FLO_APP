@@ -6,6 +6,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Box
@@ -17,6 +19,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -29,6 +32,7 @@ import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.HorizontalAlignmentLine
 import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -39,13 +43,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.umc_flo_app.ui.theme.UMC_FLO_AppTheme
+import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 import java.time.format.TextStyle
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            UMC_FLO_AppTheme {
+            UMC_FLO_AppTheme{
                 // A surface container using the 'background' color from the theme
                 Surface(
                    modifier = Modifier.fillMaxSize(),
@@ -63,8 +68,14 @@ fun ScrollHome(){
     val state = rememberScrollState()
     LaunchedEffect(Unit) {state.animateScrollTo(100)}
 
-    Column {
+    Column (
+        modifier= Modifier
+            .verticalScroll(ScrollState(100)),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.Start){
         AlbumDefault()
+        TextBar("오늘의 발매 음악",Modifier)
+        AlbumHorizon()
     }
 
 }
@@ -156,36 +167,61 @@ fun AlbumDefault(modifier: Modifier = Modifier){
 }
 
 @Composable
-fun TextBar() {
-    val text: String = "오늘의 발매 음악"
+fun TextBar(text:String, modifier:Modifier) {
     Text(
-        text = text
+        text = text,
+        color = Color.Black,
+        fontWeight = FontWeight.Bold,
+        fontSize = 20.sp,
+        modifier = Modifier
+            .offset(x=20.dp, y = 10.dp)
 
     )
 }
 
 @Composable
 fun AlbumHorizon(){
+
     val state = rememberScrollState()
-    LaunchedEffect(Unit) {state.animateScrollTo(100)}
+    LaunchedEffect(Unit) { state.animateScrollTo(100) }
 
     val alm1 = painterResource(R.drawable.scott_album)
+    val alm2 = painterResource(R.drawable.rick_mor)
+    val alm3 = painterResource(R.drawable.ins_job)
+    val alm4 = painterResource(R.drawable.sol_opp)
 
-    Row(modifier=Modifier
-        .size(100.dp)
+    Row(modifier= Modifier
+        .horizontalScroll(state)
+        .fillMaxWidth()
+        .padding(20.dp),
+        horizontalArrangement = Arrangement.spacedBy(20.dp),
+        verticalAlignment = Alignment.Top
     ){
         Image(
             painter =alm1,
             contentDescription =null,
             modifier = Modifier
-
+                .size(100.dp)
         )
         Image(
-            painter =alm1,
+            painter =alm2,
             contentDescription =null,
             modifier = Modifier
-
+                .size(100.dp)
         )
+        Image(
+            painter=alm3,
+            contentDescription = null,
+            modifier = Modifier
+                .size(100.dp)
+        )
+        Image(
+            painter=alm4,
+            contentDescription = null,
+            modifier = Modifier
+                .size(100.dp)
+        )
+
     }
 
 
