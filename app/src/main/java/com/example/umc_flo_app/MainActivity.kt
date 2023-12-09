@@ -4,7 +4,7 @@ package com.example.umc_flo_app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.horizontalScroll
@@ -28,25 +28,19 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.HorizontalAlignmentLine
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.umc_flo_app.ui.theme.UMC_FLO_AppTheme
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
-import java.time.format.TextStyle
+
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -56,7 +50,7 @@ class MainActivity : ComponentActivity() {
                    modifier = Modifier.fillMaxSize(),
                    color = MaterialTheme.colorScheme.background
                 ) {
-                    ScrollHome()
+                    BottomAppBarExample()
                 }
             }
         }
@@ -64,7 +58,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ScrollHome(){
+fun ScrollHome() {
     val state = rememberScrollState()
     LaunchedEffect(Unit) {state.animateScrollTo(100)}
 
@@ -226,6 +220,8 @@ fun AlbumHorizon(){
 
 
 }
+
+
 
 @Preview(showBackground = true)
 @Composable
