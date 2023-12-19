@@ -1,5 +1,6 @@
 package com.example.umc_flo_app
 
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,9 +12,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -21,6 +26,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -39,12 +48,12 @@ import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 @Preview
 @Composable
-fun AlbumScreen() {
+fun AlbumActivity() {
     UMC_FLO_AppTheme {
+
         Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = Color.White,
-            contentColor = Color.White
+            modifier = Modifier.fillMaxSize()
+
 
         ) {
             Column(
@@ -52,8 +61,8 @@ fun AlbumScreen() {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color.Black)
-                    .offset(y = 40.dp)
+                    .background(Color.White)
+                    .offset(y=60.dp)
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.scott_album),
@@ -64,19 +73,20 @@ fun AlbumScreen() {
                 )
                 Text(
                     text = "Album Name",
-                    color = Color.White,
+                    color = Color.Black,
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(16.dp)
                 )
                 Text(
                     text = "Artist Name",
-                    color = Color.White,
+                    color = Color.Black,
                     fontSize = 18.sp,
                     modifier = Modifier.padding(16.dp)
                 )
                 Row(
                     horizontalArrangement=Arrangement.Center,
+                    verticalAlignment=Alignment.CenterVertically,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp)
@@ -86,9 +96,9 @@ fun AlbumScreen() {
                         modifier = Modifier.size(48.dp)
                     ) {
                         Icon(
-                            imageVector = Icons.Default.Search,
+                            imageVector = Icons.Default.Refresh,
                             contentDescription = null,
-                            tint = Color.White
+                            tint = Color.Black
                         )
                     }
                     IconButton(
@@ -98,18 +108,20 @@ fun AlbumScreen() {
                         Icon(
                             imageVector = Icons.Default.PlayArrow,
                             contentDescription = null,
-                            tint = Color.White,
+                            tint = Color.Black,
                             modifier = Modifier.size(64.dp)
                         )
                     }
+                    var isClicked by remember { mutableStateOf(false) }
+
                     IconButton(
-                        onClick = { /*TODO*/ },
+                        onClick = { isClicked = !isClicked },
                         modifier = Modifier.size(48.dp)
                     ) {
                         Icon(
-                            imageVector = Icons.Default.Done,
+                            imageVector = if (isClicked) Icons.Default.FavoriteBorder else Icons.Default.Favorite,
                             contentDescription = null,
-                            tint = Color.White
+                            tint = Color.Black
                         )
                     }
                 }

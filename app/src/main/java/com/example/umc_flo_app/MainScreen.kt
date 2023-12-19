@@ -28,22 +28,25 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.umc_flo_app.ui.theme.UMC_FLO_AppTheme
 
 
 @Composable
 fun ScrollHome() {
     val state = rememberScrollState()
-    LaunchedEffect(Unit) {state.animateScrollTo(100)}
+    LaunchedEffect(Unit) {state.animateScrollTo(300)}
 
     Column (
         modifier= Modifier
-            .verticalScroll(ScrollState(100)),
+            .verticalScroll(state),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start){
         AlbumDefault()
-        TextBar("오늘의 발매 음악", Modifier)
+        TextBar("오늘의 발매 음악", Modifier.offset(y=10.dp))
         AlbumHorizon()
+        TextBar("오늘의 뮤직 비디오",Modifier)
+        AlbumHorizon2()
     }
 
 }
@@ -188,6 +191,30 @@ fun AlbumHorizon(){
             contentDescription = null,
             modifier = Modifier
                 .size(150.dp)
+        )
+
+    }
+
+
+}
+
+@Composable
+fun AlbumHorizon2(){
+
+    val alm1 = painterResource(R.drawable.discovery_banner_aos)
+
+    Row(modifier= Modifier
+        .fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(20.dp),
+        verticalAlignment = Alignment.Top
+    ){
+        Image(
+            painter =alm1,
+            contentDescription =null,
+            contentScale = ContentScale.FillWidth,
+            modifier = Modifier
+                .fillMaxWidth()
+                .offset(y=40.dp)
         )
 
     }
